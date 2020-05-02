@@ -31,7 +31,7 @@ export default function Nav() {
           <Typography variant="h6" className={classes.title}>
             Greatname-Frontend
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" href={"login"}>Login</Button>
           {/*<Button color="inherit">Logout</Button>*/}
         </Toolbar>
       </AppBar>
