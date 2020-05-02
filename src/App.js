@@ -1,38 +1,36 @@
-import React, { Component } from 'react';
-import './App.scss';
-import Nav from "./components/nav/Nav";
-import Footer from "./components/footer/Footer"
+import React from 'react';
+import Nav from "./components/Nav";
+import Footer from "./components/Footer"
+import { Grid, Container, Typography, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import CreateSurvey from './components/createsurvey/CreateSurvey';
 
-class App extends Component {
+const useStyles = makeStyles((theme) => ({
+  root: {},
+}));
 
-  render() {
-    return (
-      <div className="App">
+export default function App() {
+  const classes = useStyles();
 
+  return (
+    <Grid container direction={"column"} className={classes.root}>
+
+      <Grid item>
         <Nav />
+      </Grid>
 
-        <div className="main-container">
-          <div className="main wrapper clearfix">
+      <Box mt={3}>
+        <Grid item>
+          <Container maxWidth={'sm'}>
+            <CreateSurvey />
+          </Container>
+        </Grid>
+      </Box>
 
-            <article>
-              <header>
-                <h1>Hello World!</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas
-                  tempor.
-                  Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper
-                  consequat est, eu porta velit mollis nec.</p>
-              </header>
-            </article>
-
-          </div>
-        </div>
-
+      <Grid item>
         <Footer />
+      </Grid>
 
-      </div>
-    );
-  }
-
+    </Grid>
+  );
 }
-
-export default App;
