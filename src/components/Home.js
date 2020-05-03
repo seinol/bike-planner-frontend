@@ -1,9 +1,7 @@
 import React from 'react';
 import { Grid, Container, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Nav from "./layout/Nav";
-import Footer from "./layout/Footer"
+
 import CreateSurvey from './createsurvey/CreateSurvey';
 
 const useStyles = makeStyles((theme) => ({
