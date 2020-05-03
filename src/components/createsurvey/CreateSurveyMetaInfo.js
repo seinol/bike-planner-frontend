@@ -67,7 +67,7 @@ const CreateSurveyMetaInfo = () => {
                }/>
       </FormControl>
 
-      <FormControl fullWidth multiline className={classes.marginTop}>
+      <FormControl fullWidth aria-multiline={'true'} className={classes.marginTop}>
         <InputLabel htmlFor="survey-notes">Notiz hinzufügen</InputLabel>
         <Input id="survey-notes"
                value={values.notes}

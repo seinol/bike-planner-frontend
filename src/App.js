@@ -1,9 +1,11 @@
 import React from 'react';
-import Nav from "./components/Nav";
-import Footer from "./components/Footer"
-import { Grid, Container, Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import CreateSurvey from './components/createsurvey/CreateSurvey';
+import Route from 'react-router-dom/Route';
+import Home from './components/Home';
+import Login from './components/login/Login';
+import Nav from './components/layout/Nav';
+import Footer from './components/layout/Footer';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -13,24 +15,17 @@ export default function App() {
   const classes = useStyles();
 
   return (
-    <Grid container direction={"column"} className={classes.root}>
+    <Box>
 
-      <Grid item>
-        <Nav />
-      </Grid>
+      <Nav />
 
       <Box mt={3}>
-        <Grid item>
-          <Container maxWidth={'sm'}>
-            <CreateSurvey />
-          </Container>
-        </Grid>
+        <Route component={Home} exact path='/' />
+        <Route component={Login} path='/login' />
       </Box>
 
-      <Grid item>
-        <Footer />
-      </Grid>
+      <Footer />
 
-    </Grid>
+    </Box>
   );
 }
