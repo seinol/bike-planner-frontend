@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import React from 'react';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
   },
 }));
@@ -14,7 +14,7 @@ export default function AnswerSurvey() {
     <div className={classes.root}>
 
 
-          <Button color="inherit">Erstellen</Button>
+      <Button color="inherit">Erstellen</Button>
     </div>
   );
 }
