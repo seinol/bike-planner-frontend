@@ -4,6 +4,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Grid from '@material-ui/core/Grid';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Nav() {
+const Nav = ({ darkMode, setDarkMode }) => {
   const classes = useStyles();
 
   return (
@@ -27,9 +31,29 @@ export default function Nav() {
         <Typography variant="h6" className={classes.title}>
           Greatname-Frontend
         </Typography>
-        <Button color="inherit" href="login">Login</Button>
+
+        <Grid item container direction="row" justify="center" alignItems="center">
+          <FormControlLabel
+            control={
+              <Switch checked={darkMode} onChange={setDarkMode} color="" />
+            }
+            label="Dark mode"
+          />
+        </Grid>
+
+        {
+          window.localStorage.getItem('accessToken') !== null ?
+            (
+              <Button color="inherit" href="login">Logout</Button>
+            )
+            :
+            ''
+        }
+
 
       </Toolbar>
     </AppBar>
   );
-}
+};
+
+export default Nav;

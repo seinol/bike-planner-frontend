@@ -66,6 +66,9 @@ const CreateSurvey = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
+  const accessToken = window.localStorage.getItem('accessToken')
+
   return (
     <Grid container direction="column" className={classes.root}>
 

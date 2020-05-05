@@ -16,15 +16,13 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-  },
   footer: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    right: 0,
     padding: theme.spacing(3, 2),
     marginTop: 'auto',
-    backgroundColor: theme.palette.grey[300],
   },
 }));
 
@@ -32,13 +30,11 @@ export default function Footer() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
       <footer className={classes.footer}>
         <Container maxWidth="sm">
           <Typography variant="body1">Greatname-frontend</Typography>
           <Copyright />
         </Container>
       </footer>
-    </div>
   );
 }

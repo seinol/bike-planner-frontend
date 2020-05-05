@@ -3,9 +3,13 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import GoogleLoginButton from './GoogleLoginButton';
+import Typography from '@material-ui/core/Typography';
+import LoginMetaInfo from './LoginMetaInfo';
 
-const useStyles = makeStyles(() => ({
-  root: {},
+const useStyles = makeStyles((theme) => ({
+  loginTitle: {
+    marginBottom: theme.spacing(4)
+  },
 }));
 
 export default function Login() {
@@ -15,7 +19,17 @@ export default function Login() {
     <Container maxWidth="sm" className={classes.root}>
 
       <Grid item container direction="row" justify="center" alignItems="center">
+        {
+          window.localStorage.getItem('accessToken') === null ?
+            (
+              <LoginMetaInfo />
+            )
+            :
+            ''
+        }
+
         <GoogleLoginButton />
+
       </Grid>
 
     </Container>
