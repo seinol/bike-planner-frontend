@@ -1,6 +1,6 @@
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {Button, Typography} from '@material-ui/core';
-import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -66,8 +66,6 @@ const CreateSurvey = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-  const accessToken = window.localStorage.getItem('accessToken')
 
   return (
     <Grid container direction="column" className={classes.root}>

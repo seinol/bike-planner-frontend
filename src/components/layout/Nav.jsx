@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {

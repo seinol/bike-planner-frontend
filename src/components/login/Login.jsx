@@ -3,7 +3,6 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import GoogleLoginButton from './GoogleLoginButton';
-import Typography from '@material-ui/core/Typography';
 import LoginMetaInfo from './LoginMetaInfo';
 
 const useStyles = makeStyles((theme) => ({
