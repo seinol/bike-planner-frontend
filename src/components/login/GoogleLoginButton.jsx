@@ -28,6 +28,8 @@ class GoogleLoginButton extends Component {
         accessToken: response.accessToken
       }));
       window.localStorage.setItem('accessToken', response.accessToken);
+      window.localStorage.setItem('firstName', response.Pt.BW);
+      window.localStorage.setItem('lastName', response.Pt.CU);
       this.setState({ redirect: "/" });
     }
   }
@@ -37,6 +39,8 @@ class GoogleLoginButton extends Component {
       accessToken: ''
     }));
     window.localStorage.removeItem('accessToken');
+    window.localStorage.removeItem('firstName');
+    window.localStorage.removeItem('lastName');
     this.setState({ redirect: "/" });
   }
 
