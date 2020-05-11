@@ -32,9 +32,7 @@ const Home = () => {
   const classes = useStyles();
 
   const [openSurvey, handleOpenSurvey] = React.useState(false);
-
   const sampleSurveyHash = 'b3761826a5357e9bb8464f46d88ebb72f5ef4e31420f5b403dba571968b3bfb2';
-
   window.scrollTo(0, 0);
 
   return window.localStorage.getItem('accessToken') !== null ?
@@ -91,7 +89,7 @@ const Home = () => {
         >
 
           <Button href={'/login'} variant="contained" color="primary">
-            Login
+            Einloggen
           </Button>
 
         </Grid>

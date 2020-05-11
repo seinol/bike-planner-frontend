@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
   },
   surveyInfo: {
     marginTop: theme.spacing(1)
+  },
+  footerMargin: {
+    marginBottom: '100px'
   }
 }));
 
@@ -135,7 +138,7 @@ const AnswerSurvey = ({ surveyHash }) => {
 
   return window.localStorage.getItem('accessToken') !== null ?
     (
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" className={classes.footerMargin}>
 
         {surveyData.loading || dateElements.loading ?
           (

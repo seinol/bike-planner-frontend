@@ -10,8 +10,15 @@ import Login from './components/login/Login';
 import Nav from './components/layout/Nav';
 import Footer from './components/layout/Footer';
 import CreateSurvey from './components/createsurvey/CreateSurvey';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  root: {
+  },
+}));
 
 const App = () => {
+  const classes = useStyles();
   const [darkMode, setDarkMode] = useState(false);
 
   const theme = createMuiTheme({
@@ -21,7 +28,7 @@ const App = () => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} className={classes.root}>
 
       <CssBaseline />
 
