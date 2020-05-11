@@ -23,6 +23,8 @@ module.exports = {
   ],
   rules: {
     "linebreak-style": ["error", "windows"],
-    "no-use-before-define": ["warn", { "functions": true, "classes": true }]
+    "no-use-before-define": ["warn", { "functions": true, "classes": true }],
+    "react/prop-types": 0,
+    "import/no-cycle": 0
   },
 };

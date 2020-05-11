@@ -100,10 +100,9 @@ const CreateSurvey = () => {
           alignItems="flex-end"
         >
 
-          {activeStep === steps.length ?
-            <Typography className={classes.instructions}>SENT</Typography>
-            :
-            (
+          {activeStep === steps.length
+            ? <Typography className={classes.instructions}>SENT</Typography>
+            : (
               <Box>
 
                 <Button

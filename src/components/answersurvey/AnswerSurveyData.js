@@ -3,29 +3,29 @@ import Box from '@material-ui/core/Box';
 import { Grid, Table, TableHeaderRow } from '@devexpress/dx-react-grid-material-ui';
 
 const AnswerSurveyData = ({ surveyData, surveyDates }) => {
+  const cols = [];
+  surveyData.surveyGroups[0].surveyElements.forEach((date, index) => {
+    const dateTitle = new Date(surveyDates
+      .find((toFind) => toFind.id === date.id).date)
+      .toLocaleDateString('de-CH', { day: 'numeric', month: 'long' });
 
-  let cols = [];
-  surveyData['surveyGroups'][0]['surveyElements'].forEach((date, index) => {
-    let dateTitle = new Date(surveyDates.find(function(toFind){
-      return toFind.id === date.id
-    }).date).toLocaleDateString('de-CH', { day: 'numeric', month: 'long' });
-
-    let col = {
-      name: 'date' + index,
-      title: dateTitle
+    const col = {
+      name: `date${index}`,
+      title: dateTitle,
     };
 
     cols.push(col);
   });
 
-  let [rows] = useState(surveyData['participants'].map(participant => {
-    let row = {
-      participant: participant['firstname'] + ' ' + participant['lastname'].charAt(0) + '.'
+  const [rows] = useState(surveyData.participants.map((participant) => {
+    const row = {
+      participant: `${participant.firstname} ${participant.lastname.charAt(0)}.`,
     };
 
     cols.forEach((date, index) => {
-      row[date.name] = surveyData['answers'].filter(
-        data => data['person'].id === participant.id)[index]['selectedAnswer'] === 'YES' ? 'X' : '';
+      row[date.name] = surveyData.answers.filter(
+        (data) => data.person.id === participant.id,
+      )[index].selectedAnswer === 'YES' ? 'X' : '';
     });
 
     return row;
@@ -33,7 +33,7 @@ const AnswerSurveyData = ({ surveyData, surveyDates }) => {
 
   cols.unshift({
     name: 'participant',
-    title: 'Teilnehmer'
+    title: 'Teilnehmer',
   });
 
   const [columns] = useState(cols);

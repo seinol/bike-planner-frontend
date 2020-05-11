@@ -2,19 +2,19 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import LoginButton from './LoginButton';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
+import LoginButton from './LoginButton';
 
 const useStyles = makeStyles((theme) => ({
   loginTitle: {
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3),
   },
   metaInfo: {
     icons: theme.spacing(2),
     marginBottom: theme.spacing(2),
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -24,7 +24,7 @@ function MetaInfo() {
 
       <Typography variant="h4" align="center" className={useStyles().loginTitle}>Login</Typography>
 
-      <Typography variant="h7" align="center" className={useStyles().metaInfo}>
+      <Typography variant="h6" align="center" className={useStyles().metaInfo}>
         Du wirst bei erfolgreicher Anmeldung automatisch weitergeleitet
       </Typography>
 
@@ -45,12 +45,13 @@ export default function Login() {
       <Grid item container direction="row" justify="center" alignItems="center">
 
         {
-          window.localStorage.getItem('accessToken') === null ?
-            <MetaInfo />
-            :
-            <Typography variant={'h6'} align={'center'} className={classes.metaInfo}>
-              Klicke erneut auf den Button um dich auszuloggen
-            </Typography>
+          window.localStorage.getItem('accessToken') === null
+            ? <MetaInfo />
+            : (
+              <Typography variant="h6" align="center" className={classes.metaInfo}>
+                Klicke erneut auf den Button um dich auszuloggen
+              </Typography>
+            )
 
         }
 

@@ -2,8 +2,6 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 function Copyright() {
   return (
@@ -23,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     bottom: 0,
     width: '100%',
-    position: 'fixed'
+    position: 'fixed',
   },
   footer: {
     padding: theme.spacing(3, 2),

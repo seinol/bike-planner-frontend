@@ -14,9 +14,9 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import AnswerSurveyData from './AnswerSurveyData';
 import gql from 'graphql-tag';
 import { useSnackbar } from 'notistack';
+import AnswerSurveyData from './AnswerSurveyData';
 import Home from '../Home';
 
 function convertToLocaleDateString(rawDate) {
@@ -24,7 +24,7 @@ function convertToLocaleDateString(rawDate) {
     .toLocaleDateString('de-CH', {
       day: 'numeric',
       month: 'long',
-      year: 'numeric'
+      year: 'numeric',
     });
 }
 
@@ -38,61 +38,61 @@ const useStyles = makeStyles((theme) => ({
   },
   selectAnswerOptions: {
     marginBottom: theme.spacing(3),
-    marginLeft: theme.spacing(3)
+    marginLeft: theme.spacing(3),
   },
   surveyTitle: {
     textAlign: 'center',
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   surveyIcon: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   surveyInfo: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   footerMargin: {
-    marginBottom: '100px'
-  }
+    marginBottom: '100px',
+  },
 }));
 
 const AnswerSurvey = ({ surveyHash }) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
 
-  let surveyData = useQuery(SURVEY_DATA_QUERY, {
-    variables: { surveyHash }
+  const surveyData = useQuery(SURVEY_DATA_QUERY, {
+    variables: { surveyHash },
   });
 
   // TODO get ids of dateElements dynamically
-  /*if (!surveyData.loading){
+  /* if (!surveyData.loading){
       surveyData.data.surveyByUrlHash.surveyGroups[0].surveyElements.forEach((date, index) => {
         ids.push(index);
       });
-    }*/
+    } */
 
-  let ids = [1, 2, 3];
-  let dateElements = useQuery(SURVEY_DATE_ELEMENTS_QUERY, {
-    variables: { ids }
+  const ids = [1, 2, 3];
+  const dateElements = useQuery(SURVEY_DATE_ELEMENTS_QUERY, {
+    variables: { ids },
   });
 
   const [saveAnswer] = useMutation(SURVEY_ANSWER_MUTATION);
 
-  //TODO setState dateX dynamically
-  /*setState({...state, date1: false});
+  // TODO setState dateX dynamically
+  /* setState({...state, date1: false});
     setState({...state, date2: false});
-    setState({...state, date3: false});*/
+    setState({...state, date3: false}); */
 
   const [state, setState] = React.useState({
     date1: false,
     date2: false,
     date3: false,
-    redirect: ''
+    redirect: '',
   });
 
   const handleChange = (event) => {
     setState({
       ...state,
-      [event.target.name]: event.target.checked
+      [event.target.name]: event.target.checked,
     });
   };
 
@@ -102,55 +102,55 @@ const AnswerSurvey = ({ surveyHash }) => {
       date1: false,
       date2: false,
       date3: false,
-      redirect: '/'
+      redirect: '/',
     });
     enqueueSnackbar('Antwort gespeichert', {
       variant: 'success',
       anchorOrigin: {
         vertical: 'bottom',
         horizontal: 'center',
-      }});
+      },
+    });
   };
 
-  //TODO get answer elements dynamically by id
-  let answers = [
+  // TODO get answer elements dynamically by id
+  const answers = [
     {
       surveyId: 1,
       surveyElementId: 1,
-      selectedAnswer: getRandomYesOrNo()
+      selectedAnswer: getRandomYesOrNo(),
     },
     {
       surveyId: 1,
       surveyElementId: 2,
-      selectedAnswer: getRandomYesOrNo()
+      selectedAnswer: getRandomYesOrNo(),
     },
     {
       surveyId: 1,
       surveyElementId: 3,
-      selectedAnswer: getRandomYesOrNo()
+      selectedAnswer: getRandomYesOrNo(),
     }];
 
   if (state.redirect) {
     return (
-        <Route pathName={"/"} component={Home} />
+      <Route pathName="/" component={Home} />
     );
   }
 
-  return window.localStorage.getItem('accessToken') !== null ?
-    (
+  return window.localStorage.getItem('accessToken') !== null
+    ? (
       <Container maxWidth="sm" className={classes.footerMargin}>
 
-        {surveyData.loading || dateElements.loading ?
-          (
-            <Grid container direction={'column'} alignItems={'center'}>
+        {surveyData.loading || dateElements.loading
+          ? (
+            <Grid container direction="column" alignItems="center">
               <CircularProgress />
             </Grid>
           )
-          :
-          (
-            surveyData.error || dateElements.error ?
-              (
-                <Grid container direction={'column'} alignItems={'center'}>
+          : (
+            surveyData.error || dateElements.error
+              ? (
+                <Grid container direction="column" alignItems="center">
                   <ErrorIcon />
                   <Typography>
                     Error fetching data
@@ -160,40 +160,41 @@ const AnswerSurvey = ({ surveyHash }) => {
                     anchorOrigin: {
                       vertical: 'bottom',
                       horizontal: 'center',
-                    }})}
+                    },
+                  })}
                 </Grid>
               )
-              :
-              (
+              : (
                 <Box>
-                  <Grid container direction={'column'}>
-                    <Typography variant={'h3'} className={classes.surveyTitle}>
-                      {surveyData.data['surveyByUrlHash'].name}
+                  <Grid container direction="column">
+                    <Typography variant="h3" className={classes.surveyTitle}>
+                      {surveyData.data.surveyByUrlHash.name}
                     </Typography>
 
                     <Grid item container direction="column">
                       <Grid item container direction="row" className={classes.surveyInfo}>
                         <LocationOnIcon className={classes.surveyIcon} />
                         <Typography>
-                          {surveyData.data['surveyByUrlHash'].area}
+                          {surveyData.data.surveyByUrlHash.area}
                         </Typography>
                       </Grid>
                       <Grid item container direction="row" className={classes.surveyInfo}>
                         <ScheduleIcon className={classes.surveyIcon} />
                         <Typography>
-                          {convertToLocaleDateString(surveyData.data['surveyByUrlHash']['finishBy'])}
+                          {convertToLocaleDateString(surveyData.data.surveyByUrlHash.finishBy)}
                         </Typography>
                       </Grid>
                     </Grid>
 
                     <Grid item>
                       <AnswerSurveyData
-                        surveyData={surveyData.data['surveyByUrlHash']}
-                        surveyDates={dateElements.data['surveyDateElements']} />
+                        surveyData={surveyData.data.surveyByUrlHash}
+                        surveyDates={dateElements.data.surveyDateElements}
+                      />
                     </Grid>
 
                     <form
-                      onSubmit={e => {
+                      onSubmit={(e) => {
                         e.preventDefault();
                         saveAnswer(
                           {
@@ -201,9 +202,9 @@ const AnswerSurvey = ({ surveyHash }) => {
                               lastName: window.localStorage.getItem('lastName'),
                               firstName: window.localStorage.getItem('firstName'),
                               email: window.localStorage.getItem('email'),
-                              answers: answers
-                            }
-                          }
+                              answers,
+                            },
+                          },
                         )
                           .then(handleSubmit);
                       }}
@@ -217,11 +218,15 @@ const AnswerSurvey = ({ surveyHash }) => {
                         <FormControl component="fieldset" className={classes.selectAnswerOptions}>
                           <FormGroup>
                             {
-                              dateElements.data['surveyDateElements'].map(dateElement => (
+                              dateElements.data.surveyDateElements.map((dateElement) => (
                                 <FormControlLabel
-                                  control={<Checkbox checked={state['date' + dateElement.id]}
-                                                     onChange={handleChange}
-                                                     name={'date' + dateElement.id} />}
+                                  control={(
+                                    <Checkbox
+                                      checked={state[`date${dateElement.id}`]}
+                                      onChange={handleChange}
+                                      name={`date${dateElement.id}`}
+                                    />
+)}
                                   label={convertToLocaleDateString(dateElement.date)}
                                 />
                               ))
@@ -244,13 +249,11 @@ const AnswerSurvey = ({ surveyHash }) => {
                   </Grid>
                 </Box>
               )
-          )
-        }
+          )}
       </Container>
     )
-    :
-    (
-      <Redirect to={'/'} />
+    : (
+      <Redirect to="/" />
     );
 };
 
