@@ -29,7 +29,7 @@ const Nav = ({ darkMode, setDarkMode }) => {
       <Toolbar>
 
         <Typography variant="h6" className={classes.title}>
-          Greatname
+          Bike Planner
         </Typography>
 
         <Grid item container direction="row" justify="center" alignItems="center">
