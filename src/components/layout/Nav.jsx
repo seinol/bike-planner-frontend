@@ -1,12 +1,12 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
+import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import AppBar from '@material-ui/core/AppBar';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,10 +25,11 @@ const Nav = ({ darkMode, setDarkMode }) => {
 
   return (
     <AppBar position="static" className={classes.root}>
+
       <Toolbar>
 
         <Typography variant="h6" className={classes.title}>
-          Greatname-Frontend
+          Greatname
         </Typography>
 
         <Grid item container direction="row" justify="center" alignItems="center">
@@ -41,16 +42,12 @@ const Nav = ({ darkMode, setDarkMode }) => {
         </Grid>
 
         {
-          window.localStorage.getItem('accessToken') !== null ?
-            (
-              <Button color="inherit" href="login">Logout</Button>
-            )
-            :
-            ''
+          window.localStorage.getItem('accessToken') !== null
+          && <Button color="inherit" href="/login">Logout</Button>
         }
 
-
       </Toolbar>
+
     </AppBar>
   );
 };

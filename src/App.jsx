@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Box, createMuiTheme } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
+import { Box, createMuiTheme } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
-import { SnackbarProvider } from 'notistack';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Home from './components/Home';
 import Login from './components/login/Login';
 import Nav from './components/layout/Nav';
 import Footer from './components/layout/Footer';
-import AnswerSurvey from './components/answersurvey/AnswerSurvey';
+import CreateSurvey from './components/createsurvey/CreateSurvey';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -22,17 +22,20 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+
       <CssBaseline />
-      <SnackbarProvider maxSnack={3}>
+
+      <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
+
         <Paper elevation={0}>
 
           <Nav darkMode={darkMode} setDarkMode={() => setDarkMode(!darkMode)}/>
 
-          <Box mt={3}>
+          <Box mt={3} mb={3}>
             <Switch>
               <Route component={Home} exact path="/" />
               <Route component={Login} path="/login" />
-              <Route component={AnswerSurvey} path="/answer" />
+              <Route component={CreateSurvey} path="/create" />
               <Route component={Home} path="/" />
             </Switch>
           </Box>
@@ -40,7 +43,9 @@ const App = () => {
           <Footer />
 
         </Paper>
+
       </SnackbarProvider>
+
     </ThemeProvider>
   );
 };

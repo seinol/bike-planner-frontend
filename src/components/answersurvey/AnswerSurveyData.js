@@ -5,9 +5,7 @@ import { Grid, Table, TableHeaderRow } from '@devexpress/dx-react-grid-material-
 const AnswerSurveyData = ({ surveyData, surveyDates }) => {
 
   let cols = [];
-
-  surveyData.surveyGroups[0].surveyElements.forEach(function(date, index) {
-
+  surveyData['surveyGroups'][0]['surveyElements'].forEach((date, index) => {
     let dateTitle = new Date(surveyDates.find(function(toFind){
       return toFind.id === date.id
     }).date).toLocaleDateString('de-CH', { day: 'numeric', month: 'long' });
@@ -20,13 +18,14 @@ const AnswerSurveyData = ({ surveyData, surveyDates }) => {
     cols.push(col);
   });
 
-  let [rows] = useState(surveyData['participants'].map(function (participant) {
-    let row = { participant: participant['firstname'] + ' ' + participant['lastname'] };
+  let [rows] = useState(surveyData['participants'].map(participant => {
+    let row = {
+      participant: participant['firstname'] + ' ' + participant['lastname'].charAt(0) + '.'
+    };
 
-    cols.forEach(function (date, index) {
-      row[date.name] = surveyData['answers'].filter(function (data) {
-        return data['person'].id = participant.id;
-      })[index]['selectedAnswer'] === 'YES' ? 'X' : '';
+    cols.forEach((date, index) => {
+      row[date.name] = surveyData['answers'].filter(
+        data => data['person'].id === participant.id)[index]['selectedAnswer'] === 'YES' ? 'X' : '';
     });
 
     return row;
@@ -37,11 +36,10 @@ const AnswerSurveyData = ({ surveyData, surveyDates }) => {
     title: 'Teilnehmer'
   });
 
-
   const [columns] = useState(cols);
 
   return (
-    <Box>
+    <Box mt={2}>
 
       <Grid
         rows={rows}
@@ -52,6 +50,7 @@ const AnswerSurveyData = ({ surveyData, surveyDates }) => {
         <TableHeaderRow />
 
       </Grid>
+
     </Box>
   );
 };

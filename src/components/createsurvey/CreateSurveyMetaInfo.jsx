@@ -11,7 +11,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const useStyles = makeStyles((theme) => ({
   marginTop: {
-    marginTop: theme.spacing(3),
+    icons: theme.spacing(3),
   },
 }));
 

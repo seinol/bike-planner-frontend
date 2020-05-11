@@ -1,12 +1,11 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import {Button, Typography} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Button, Container, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Fade from '@material-ui/core/Fade';
-import CreateSurveyOptions from './CreateSurveyOptions';
 import CreateSurveyMetaInfo from './CreateSurveyMetaInfo';
 
 const useStyles = makeStyles((theme) => ({
@@ -15,12 +14,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   instructions: {
-    marginTop: theme.spacing(1),
+    icons: theme.spacing(1),
     marginBottom: theme.spacing(1),
-  },
-  divider: {
-    marginTop: theme.spacing(6),
-    marginBottom: theme.spacing(6),
   },
 }));
 
@@ -45,11 +40,11 @@ function getStepTitle(stepIndex) {
 function getStepComponent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return <Fade><CreateSurveyMetaInfo /></Fade>;
+      return <CreateSurveyMetaInfo />;
     case 1:
-      return <Fade><CreateSurveyOptions /></Fade>;
+      return <Typography>Under construction...</Typography>;
     case 2:
-      return <Fade><Typography>END</Typography></Fade>;
+      return <Typography>Under construction...</Typography>;
     default:
       return 'Unknown stepIndex';
   }
@@ -59,6 +54,7 @@ const CreateSurvey = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -68,58 +64,67 @@ const CreateSurvey = () => {
   };
 
   return (
-    <Grid container direction="column" className={classes.root}>
+    <Container maxWidth="sm" className={classes.root}>
 
-      <Grid item>
-        <Typography variant="h4" align="center">
-          {getStepTitle(activeStep)}
+      <Grid container direction="column" className={classes.root}>
+
+        <Typography variant="h3" align="center">
+          Motorradtour erstellen
         </Typography>
+
+        <Grid item>
+          <Typography variant="h4" align="center">
+            {getStepTitle(activeStep)}
+          </Typography>
+        </Grid>
+
+        <Grid item>
+          {getStepComponent(activeStep)}
+        </Grid>
+
+        <Grid item>
+          <Stepper activeStep={activeStep} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </Grid>
+
+        <Grid
+          item
+          container
+          direction="row"
+          justify="flex-end"
+          alignItems="flex-end"
+        >
+
+          {activeStep === steps.length ?
+            <Typography className={classes.instructions}>SENT</Typography>
+            :
+            (
+              <Box>
+
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  Zurück
+                </Button>
+
+                <Button variant="contained" color="primary" onClick={handleNext}>
+                  {activeStep === steps.length - 1 ? 'Erstellen' : 'Weiter'}
+                </Button>
+
+              </Box>
+            )}
+
+        </Grid>
+
       </Grid>
-
-      <Grid item>
-        {getStepComponent(activeStep)}
-      </Grid>
-
-      <Grid item>
-        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Grid>
-
-      <Grid
-        item
-        container
-        direction="row"
-        justify="flex-end"
-        alignItems="flex-end"
-      >
-
-        {activeStep === steps.length ? (
-          <Typography className={classes.instructions}>SENT</Typography>
-        ) : (
-          <div>
-            <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                Zurück
-              </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? 'Erstellen' : 'Weiter'}
-              </Button>
-            </div>
-          </div>
-        )}
-
-      </Grid>
-
-    </Grid>
+    </Container>
   );
 };
 

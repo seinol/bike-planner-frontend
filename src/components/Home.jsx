@@ -1,46 +1,99 @@
 import React from 'react';
 import { Container, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import CreateSurvey from './createsurvey/CreateSurvey';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import AnswerSurvey from './answersurvey/AnswerSurvey';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import FormControl from '@material-ui/core/FormControl';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Box from '@material-ui/core/Box';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(2),
+    icons: theme.spacing(2),
   },
-  welcomeTitle: {
-    marginBottom: theme.spacing(4),
+  marginBottom: {
+    marginBottom: theme.spacing(2)
   }
 }));
+
+function Welcome() {
+  return (
+    <Typography variant="h4" align="center" className={useStyles().marginBottom}>
+      Willkommen auf Bike Planner
+    </Typography>
+  );
+}
 
 const Home = () => {
   const classes = useStyles();
 
+  const [openSurvey, handleOpenSurvey] = React.useState(false);
+
+  const sampleSurveyHash = 'b3761826a5357e9bb8464f46d88ebb72f5ef4e31420f5b403dba571968b3bfb2';
+
+  window.scrollTo(0, 0);
+
   return window.localStorage.getItem('accessToken') !== null ?
     (
       <Container maxWidth="sm" className={classes.root}>
-        <Typography variant="h3" align="center">
-          Motorradtour erstellen
-        </Typography>
-        <CreateSurvey />
+        {
+          openSurvey ?
+            <AnswerSurvey surveyHash={sampleSurveyHash} />
+            :
+            <Box>
+
+              <Welcome />
+
+              <Typography variant={'h6'} align={'center'} className={classes.marginBottom}>
+                Benutze einen Schlüssel um eine Umfrage zu beantworten
+              </Typography>
+
+
+              <FormControl fullWidth required className={classes.marginBottom}>
+                <InputLabel htmlFor="survey-title">Schlüssel eingeben</InputLabel>
+                <Input
+                  disabled
+                  id="survey-title"
+                  value={sampleSurveyHash}
+                  startAdornment={(
+                    <InputAdornment position="start">
+                      <VpnKeyIcon />
+                    </InputAdornment>
+                  )}
+                />
+              </FormControl>
+              <Button onClick={handleOpenSurvey} variant="contained" color="primary">
+                Öffnen
+              </Button>
+            </Box>
+        }
       </Container>
     )
     :
     (
       <Container maxWidth="sm" className={classes.root}>
+
+        <Welcome />
+
+        <Typography variant={'h6'} align={'center'} className={classes.marginBottom}>
+          Bitte einloggen um fortzufahren
+        </Typography>
+
         <Grid
           item
           container
           direction="row"
           justify="center"
         >
-          <Typography variant="h4" align="center" className={classes.welcomeTitle}>
-            Willkommen auf der Motorradtour-Terminfindungs-Plattform
-          </Typography>
+
           <Button href={'/login'} variant="contained" color="primary">
             Login
           </Button>
+
         </Grid>
 
       </Container>
