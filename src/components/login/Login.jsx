@@ -45,14 +45,13 @@ export default function Login() {
       <Grid item container direction="row" justify="center" alignItems="center">
 
         {
-          window.localStorage.getItem('accessToken') === null
+          window.localStorage.getItem('tokenId') === null
             ? <MetaInfo />
             : (
               <Typography variant="h6" align="center" className={classes.metaInfo}>
                 Klicke erneut auf den Button um dich auszuloggen
               </Typography>
             )
-
         }
 
         <LoginButton />

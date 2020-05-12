@@ -13,7 +13,7 @@ class LoginButton extends Component {
     super(props);
 
     this.state = {
-      accessToken: window.localStorage.getItem('accessToken'),
+      tokenId: window.localStorage.getItem('tokenId'),
       redirect: null,
     };
 
@@ -24,23 +24,23 @@ class LoginButton extends Component {
   }
 
   login(response) {
-    if (response.accessToken) {
+    if (response.tokenId) {
       this.setState(() => ({
-        accessToken: response.accessToken,
+        tokenId: response.tokenId,
       }));
-      window.localStorage.setItem('accessToken', response.accessToken);
-      window.localStorage.setItem('firstName', response.Pt.BW);
-      window.localStorage.setItem('lastName', response.Pt.CU);
-      window.localStorage.setItem('email', response.Pt.yu);
+      window.localStorage.setItem('tokenId', response.tokenId);
+      window.localStorage.setItem('firstName', response.profileObj.givenName);
+      window.localStorage.setItem('lastName', response.profileObj.familyName);
+      window.localStorage.setItem('email', response.profileObj.email);
       this.setState({ redirect: '/' });
     }
   }
 
   logout() {
     this.setState(() => ({
-      accessToken: '',
+      tokenId: '',
     }));
-    window.localStorage.removeItem('accessToken');
+    window.localStorage.removeItem('tokenId');
     window.localStorage.removeItem('firstName');
     window.localStorage.removeItem('lastName');
     window.localStorage.removeItem('email');
@@ -62,7 +62,7 @@ class LoginButton extends Component {
     return (
       <Box mt={2}>
         {
-          this.state.accessToken !== null
+          this.state.tokenId !== null
             ? (
               <GoogleLogout
                 clientId={CLIENT_ID}

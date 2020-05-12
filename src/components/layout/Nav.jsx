@@ -42,7 +42,7 @@ const Nav = ({ darkMode, setDarkMode }) => {
         </Grid>
 
         {
-          window.localStorage.getItem('accessToken') !== null
+          window.localStorage.getItem('tokenId') !== null
           && <Button color="inherit" href="/login">Logout</Button>
         }
 

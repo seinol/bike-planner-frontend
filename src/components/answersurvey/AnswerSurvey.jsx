@@ -16,7 +16,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import gql from 'graphql-tag';
 import { useSnackbar } from 'notistack';
-import AnswerSurveyData from './AnswerSurveyData';
+import AnswerSurveyData from './AnswerSurveyDataTable';
 import Home from '../Home';
 
 function convertToLocaleDateString(rawDate) {
@@ -137,7 +137,7 @@ const AnswerSurvey = ({ surveyHash }) => {
     );
   }
 
-  return window.localStorage.getItem('accessToken') !== null
+  return window.localStorage.getItem('tokenId') !== null
     ? (
       <Container maxWidth="sm" className={classes.footerMargin}>
 

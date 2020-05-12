@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Box from '@material-ui/core/Box';
 import { Grid, Table, TableHeaderRow } from '@devexpress/dx-react-grid-material-ui';
 
-const AnswerSurveyData = ({ surveyData, surveyDates }) => {
+const AnswerSurveyDataTable = ({ surveyData, surveyDates }) => {
   const cols = [];
   surveyData.surveyGroups[0].surveyElements.forEach((date, index) => {
     const dateTitle = new Date(surveyDates
@@ -55,4 +55,4 @@ const AnswerSurveyData = ({ surveyData, surveyDates }) => {
   );
 };
 
-export default AnswerSurveyData;
+export default AnswerSurveyDataTable;

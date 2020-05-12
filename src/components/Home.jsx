@@ -35,7 +35,7 @@ const Home = () => {
   const sampleSurveyHash = 'b3761826a5357e9bb8464f46d88ebb72f5ef4e31420f5b403dba571968b3bfb2';
   window.scrollTo(0, 0);
 
-  return window.localStorage.getItem('accessToken') !== null
+  return window.localStorage.getItem('tokenId') !== null
     ? (
       <Container maxWidth="sm" className={classes.root}>
         {
@@ -49,7 +49,6 @@ const Home = () => {
                 <Typography variant="h6" align="center" className={classes.marginBottom}>
                   Benutze einen Schlüssel um eine Umfrage zu beantworten
                 </Typography>
-
 
                 <FormControl fullWidth required className={classes.marginBottom}>
                   <InputLabel htmlFor="survey-title">Schlüssel eingeben</InputLabel>
